@@ -9,12 +9,12 @@ public class EmployeeTest {
     @ParameterizedTest(name = "{3}の場合")
     @CsvSource(delimiter = '|', textBlock = """
         # FIRST NAME | LAST NAME | MESSAGE            | TESTNAME
-                     |    YAMADA | Illegal first name | 名前がnull
+                     |    YAMADA | First name must not be blank | 名前がnull
         """)
     void ガード条件に違反する不正な値を検出する(String firstName, String lastName, String message, String testName)
         throws Exception {
         // assert
-        String id = "1";
+        int id = 1;
         assertThatThrownBy(() -> new Employee(id, firstName, lastName))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining(message);
