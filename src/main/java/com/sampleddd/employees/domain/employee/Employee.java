@@ -1,7 +1,9 @@
 package com.sampleddd.employees.domain.employee;
 
+import static com.sampleddd.employees.domain.exception.ExceptionMessages.FIRST_NAME_NOT_BLANK_MESSAGE;
+import static com.sampleddd.employees.domain.exception.ExceptionMessages.ID_NOT_POSITIVE_VALUE_MESSAGE;
+import static com.sampleddd.employees.domain.exception.ExceptionMessages.LAST_NAME_NOT_BLANK_MESSAGE;
 import static io.micrometer.common.util.StringUtils.isBlank;
-import static java.util.Objects.isNull;
 
 /**
  * 従業員エンティティを表すクラス。従業員の基本情報である名前、姓、ID を保持します。
@@ -15,8 +17,8 @@ public record Employee(long id, String firstName, String lastName) {
      * @param lastName  従業員の姓
      */
     public Employee {
-        if (id <= 0) throw new IllegalArgumentException("Employee ID must be positive");
-        if (isBlank(firstName)) throw new IllegalArgumentException("First name must not be blank");
-        if (isBlank(lastName)) throw new IllegalArgumentException("Last name must not be blank");
+        if (id <= 0) throw new IllegalArgumentException(ID_NOT_POSITIVE_VALUE_MESSAGE.message());
+        if (isBlank(firstName)) throw new IllegalArgumentException(FIRST_NAME_NOT_BLANK_MESSAGE.message());
+        if (isBlank(lastName)) throw new IllegalArgumentException(LAST_NAME_NOT_BLANK_MESSAGE.message());
     }
 }
