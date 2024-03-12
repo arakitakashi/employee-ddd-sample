@@ -1,7 +1,7 @@
 package com.sampleddd.employees.infrastructure;
 
 import static com.sampleddd.employees.domain.exception.ExceptionMessages.DATABASE_ACCESS_ERROR_MESSAGE;
-import static java.util.Collections.emptyList;
+import static java.util.Objects.isNull;
 
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
@@ -30,10 +30,22 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         String query = "SELECT id, first_name, last_name FROM employees";
 
         try {
-            return jdbcTemplate.query(query, new DataClassRowMapper<>(Employee.class));
+            return jdbcTemplate.query(query, new DataClassRowMapper<>(EmployeeRecord.class))
+                .stream().map(this::mapToEmployee).toList();
         } catch (DataAccessException e) {
-            log.error(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
-            return emptyList();
+            log.warn(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
+            throw e;
         }
+    }
+
+    private Employee mapToEmployee(EmployeeRecord employeeRecord) {
+        if (isNull(employeeRecord)) {
+            return null;
+        }
+        return new Employee(
+            employeeRecord.id(),
+            employeeRecord.firstName(),
+            employeeRecord.lastName()
+        );
     }
 }
