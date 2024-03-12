@@ -1,7 +1,6 @@
 package com.sampleddd.employees.infrastructure;
 
 import static com.sampleddd.employees.domain.exception.ExceptionMessages.DATABASE_ACCESS_ERROR_MESSAGE;
-import static java.util.Objects.isNull;
 
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
@@ -39,9 +38,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     private Employee mapToEmployee(EmployeeRecord employeeRecord) {
-        if (isNull(employeeRecord)) {
-            return null;
-        }
         return new Employee(
             employeeRecord.id(),
             employeeRecord.firstName(),
