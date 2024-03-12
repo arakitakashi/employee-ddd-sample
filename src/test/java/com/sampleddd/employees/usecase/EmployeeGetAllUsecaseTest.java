@@ -1,5 +1,6 @@
 package com.sampleddd.employees.usecase;
 
+import com.sampleddd.employees.usecase.dto.EmployeeDto;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class GetAllUsecaseTest {
+class EmployeeGetAllUsecaseTest {
     @Autowired
-    AddressGetAllUsecase sut;
+    EmployeeGetAllUsecase sut;
 
     @Test
     void 全ての住所情報を返す() {
