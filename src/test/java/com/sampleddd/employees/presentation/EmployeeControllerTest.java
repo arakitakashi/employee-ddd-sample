@@ -33,10 +33,10 @@ public class EmployeeControllerTest {
                 .then()
                 .statusCode(200)
                 .body("employees.size()", is(2))
-                .body("employees[0].id", is(1))
+                .body("employees[0].id", is("1"))
                 .body("employees[0].firstName", is("Taro"))
                 .body("employees[0].lastName", is("Yamada"))
-                .body("employees[1].id", is(1))
+                .body("employees[1].id", is("2"))
                 .body("employees[1].firstName", is("Jiro"))
                 .body("employees[1].lastName", is("Yamada"));
         }
