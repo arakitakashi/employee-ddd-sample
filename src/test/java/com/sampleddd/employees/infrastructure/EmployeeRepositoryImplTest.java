@@ -7,6 +7,7 @@ import com.github.database.rider.core.api.connection.ConnectionHolder;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.junit5.api.DBRider;
 import com.sampleddd.employees.domain.employee.Employee;
+import com.sampleddd.employees.domain.employee.EmployeeRepository;
 import java.sql.DriverManager;
 import java.util.List;
 import org.flywaydb.core.Flyway;

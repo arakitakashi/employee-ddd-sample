@@ -14,7 +14,12 @@ public enum ExceptionMessages {
     /**
      * 姓が空またはNullだった場合に使用します。
      */
-    LAST_NAME_NOT_BLANK_MESSAGE("Last name must not be blank");
+    LAST_NAME_NOT_BLANK_MESSAGE("Last name must not be blank"),
+
+    /**
+     * DataAccessException発生時のログ出力に使用します。
+     */
+    DATABASE_ACCESS_ERROR_MESSAGE("database Access Error");
 
     private final String message;
 
