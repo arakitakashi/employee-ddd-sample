@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static com.sampleddd.employees.domain.exception.ExceptionMessages.DATABASE_ACCESS_ERROR_MESSAGE;
+import static com.sampleddd.employees.domain.exception.ExceptionMessages.FAIL_GET_NEXT_ID_NUMBER_MESSAGE;
 
 /**
  * {@link EmployeeRepository}のJDBCによる実装。 従業員情報のデータベース操作を担います。
@@ -64,7 +65,16 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public long nextId() {
-        return 1L;
+        String query = "SELECT NEXTVAL('EMPLOYEE_ID_SEQ')";
+
+        try {
+            return Optional.ofNullable(
+                    jdbcTemplate.queryForObject(query, new HashMap<>(), Long.class)
+            ).orElseThrow(() -> new IllegalStateException(FAIL_GET_NEXT_ID_NUMBER_MESSAGE.message()));
+        } catch (DataAccessException e) {
+            log.warn(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
+            throw e;
+        }
     }
 
     private Employee mapToEmployee(EmployeeRecord employeeRecord) {
