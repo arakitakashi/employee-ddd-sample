@@ -4,7 +4,10 @@ import static com.sampleddd.employees.domain.exception.ExceptionMessages.DATABAS
 
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
+
 import java.util.List;
+import java.util.Optional;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
@@ -30,18 +33,26 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
         try {
             return jdbcTemplate.query(query, new DataClassRowMapper<>(EmployeeRecord.class))
-                .stream().map(this::mapToEmployee).toList();
+                    .stream().map(this::mapToEmployee).toList();
         } catch (DataAccessException e) {
             log.warn(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
             throw e;
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<Employee> findById(String id) {
+        return Optional.empty();
+    }
+
     private Employee mapToEmployee(EmployeeRecord employeeRecord) {
         return new Employee(
-            employeeRecord.id(),
-            employeeRecord.firstName(),
-            employeeRecord.lastName()
+                employeeRecord.id(),
+                employeeRecord.firstName(),
+                employeeRecord.lastName()
         );
     }
 }
