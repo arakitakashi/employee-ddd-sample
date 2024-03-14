@@ -61,7 +61,7 @@ public class EmployeeControllerTest {
             // arrange
             String employeeId = "1";
             when(employeeRepository.findById(employeeId)).thenReturn(
-                    Optional.of(new Employee(1L, "Taro", "Yamada"))
+                    Optional.of(new Employee(1L, "Yamada", "Taro"))
             );
 
             // assert
