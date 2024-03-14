@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
+import com.sampleddd.employees.domain.exception.EmployeeNotFoundException;
 import com.sampleddd.employees.usecase.dto.EmployeeDto;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

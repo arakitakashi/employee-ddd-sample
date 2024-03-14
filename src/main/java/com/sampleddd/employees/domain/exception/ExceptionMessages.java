@@ -2,6 +2,11 @@ package com.sampleddd.employees.domain.exception;
 
 public enum ExceptionMessages {
     /**
+     * IDに対応する従業員情報が存在しない場合に使用します。
+     */
+    EMPLOYEE_NOT_FOUND_MESSAGE("specified employee [id = %s] is not found."),
+
+    /**
      * ID が正の値でない場合に使用します。
      */
     ID_NOT_POSITIVE_VALUE_MESSAGE("Employee ID must be positive"),
@@ -49,5 +54,15 @@ public enum ExceptionMessages {
      */
     public String message() {
         return message;
+    }
+
+    /**
+     * 引数をもとにフォーマットされたメッセージを返します。
+     *
+     * @param args フォーマットのための引数。
+     * @return フォーマットされたメッセージ文字列。
+     */
+    public String formattedMessage(Object... args) {
+        return String.format(message, args);
     }
 }
