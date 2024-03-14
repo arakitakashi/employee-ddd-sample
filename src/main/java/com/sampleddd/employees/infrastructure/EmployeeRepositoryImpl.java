@@ -5,12 +5,15 @@ import static com.sampleddd.employees.domain.exception.ExceptionMessages.DATABAS
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -45,7 +48,22 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
      */
     @Override
     public Optional<Employee> findById(String id) {
-        return Optional.empty();
+        String query =
+                "SELECT id, first_name, last_name FROM employees WHERE id = :id";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", Integer.parseInt(id));
+
+        try {
+            EmployeeRecord employeeRecord = jdbcTemplate.queryForObject(query, params,
+                    new DataClassRowMapper<>(EmployeeRecord.class));
+            return Optional.ofNullable(mapToEmployee(employeeRecord));
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        } catch (DataAccessException e) {
+            log.warn(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
+            throw e;
+        }
     }
 
     private Employee mapToEmployee(EmployeeRecord employeeRecord) {

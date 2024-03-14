@@ -64,7 +64,7 @@ public class EmployeeRepositoryImplTest {
         void 指定されたIdの住所情報を取得する() {
             // arrange
             Optional<Employee> expected = Optional.of(
-                    new Employee(1L, "Yamada", "Taro")
+                    new Employee(1L, "Taro", "Yamada")
             );
 
             // act
