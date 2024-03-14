@@ -34,8 +34,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         String query = "SELECT id, first_name, last_name FROM employees";
 
         try {
-            return jdbcTemplate.query(query, new DataClassRowMapper<>(EmployeeRecord.class))
-                    .stream().map(this::mapToEmployee).toList();
+            return jdbcTemplate.query(query, new DataClassRowMapper<>(EmployeeRecord.class)).stream().map(this::mapToEmployee).toList();
         } catch (DataAccessException e) {
             log.warn(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
             throw e;
@@ -47,15 +46,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
      */
     @Override
     public Optional<Employee> findById(String id) {
-        String query =
-                "SELECT id, first_name, last_name FROM employees WHERE id = :id";
+        String query = "SELECT id, first_name, last_name FROM employees WHERE id = :id";
 
         Map<String, Object> params = new HashMap<>();
         params.put("id", Integer.parseInt(id));
 
         try {
-            EmployeeRecord employeeRecord = jdbcTemplate.queryForObject(query, params,
-                    new DataClassRowMapper<>(EmployeeRecord.class));
+            EmployeeRecord employeeRecord = jdbcTemplate.queryForObject(query, params, new DataClassRowMapper<>(EmployeeRecord.class));
             return Optional.ofNullable(mapToEmployee(employeeRecord));
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
@@ -71,10 +68,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     private Employee mapToEmployee(EmployeeRecord employeeRecord) {
-        return new Employee(
-                employeeRecord.id(),
-                employeeRecord.firstName(),
-                employeeRecord.lastName()
-        );
+        return new Employee(employeeRecord.id(), employeeRecord.firstName(), employeeRecord.lastName());
     }
 }

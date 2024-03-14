@@ -74,4 +74,20 @@ public class EmployeeRepositoryImplTest {
             assertThat(actual).isEqualTo(expected);
         }
     }
+
+    @Nested
+    class ID採番 {
+        @Test
+        @DataSet(value = "datasets/employee/employees-setup.yml")
+        void 新規でIDのためのナンバーを採番する() {
+            // arrange
+            long expected = 3L;
+
+            // act
+            long actual = sut.nextId();
+
+            // assert
+            assertThat(actual).isEqualTo(expected);
+        }
+    }
 }
