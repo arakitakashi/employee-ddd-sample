@@ -8,8 +8,11 @@ import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.junit5.api.DBRider;
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
+
 import java.sql.DriverManager;
 import java.util.List;
+import java.util.Optional;
+
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
@@ -22,11 +25,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 @DBUnit(cacheConnection = false)
 public class EmployeeRepositoryImplTest {
     private static final String DB_URL =
-        "jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false";
+            "jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false";
     private static final String DB_USER = "utuser";
     private static final String DB_PASSWORD = "utpassword";
     private static final ConnectionHolder connectionHolder =
-        () -> DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            () -> DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
     @Autowired
     EmployeeRepository sut;
@@ -48,6 +51,24 @@ public class EmployeeRepositoryImplTest {
 
             // act
             List<Employee> actual = sut.findAll();
+
+            // assert
+            assertThat(actual).isEqualTo(expected);
+        }
+    }
+
+    @Nested
+    class 単体取得 {
+        @Test
+        @DataSet(value = "datasets/employee/employees-setup.yml")
+        void 指定されたIdの住所情報を取得する() {
+            // arrange
+            Optional<Employee> expected = Optional.of(
+                    new Employee(1L, "Yamada", "Taro")
+            );
+
+            // act
+            Optional<Employee> actual = sut.findById("1");
 
             // assert
             assertThat(actual).isEqualTo(expected);
