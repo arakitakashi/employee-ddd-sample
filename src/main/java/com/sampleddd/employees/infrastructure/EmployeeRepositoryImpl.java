@@ -1,15 +1,7 @@
 package com.sampleddd.employees.infrastructure;
 
-import static com.sampleddd.employees.domain.exception.ExceptionMessages.DATABASE_ACCESS_ERROR_MESSAGE;
-
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
@@ -17,6 +9,13 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import static com.sampleddd.employees.domain.exception.ExceptionMessages.DATABASE_ACCESS_ERROR_MESSAGE;
 
 /**
  * {@link EmployeeRepository}のJDBCによる実装。 従業員情報のデータベース操作を担います。
@@ -64,6 +63,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             log.warn(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
             throw e;
         }
+    }
+
+    @Override
+    public long nextId() {
+        return 1L;
     }
 
     private Employee mapToEmployee(EmployeeRecord employeeRecord) {

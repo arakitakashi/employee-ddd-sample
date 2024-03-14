@@ -21,4 +21,11 @@ public interface EmployeeRepository {
      * @return 従業員情報。
      */
     Optional<Employee> findById(String id);
+
+    /**
+     * データベースから付番される次のIDの値を返します。
+     *
+     * @return 付番された新しいIDの値
+     */
+    long nextId();
 }

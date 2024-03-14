@@ -7,6 +7,11 @@ public enum ExceptionMessages {
     EMPLOYEE_NOT_FOUND_MESSAGE("specified employee [id = %s] is not found."),
 
     /**
+     * AddressRepositoryで発番されたID番号が取得できなかった場合に使用します。
+     */
+    FAIL_GET_NEXT_ID_NUMBER_MESSAGE("Failed to fetch next address ID from sequence."),
+
+    /**
      * ID が正の値でない場合に使用します。
      */
     ID_NOT_POSITIVE_VALUE_MESSAGE("Employee ID must be positive"),
