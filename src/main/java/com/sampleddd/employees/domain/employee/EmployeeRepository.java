@@ -23,6 +23,14 @@ public interface EmployeeRepository {
     Optional<Employee> findById(String id);
 
     /**
+     * 指定された従業員情報を登録します。
+     *
+     * @param employee
+     * @return
+     */
+    long register(Employee employee);
+
+    /**
      * データベースから付番される次のIDの値を返します。
      *
      * @return 付番された新しいIDの値

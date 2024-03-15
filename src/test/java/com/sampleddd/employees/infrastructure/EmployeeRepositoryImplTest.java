@@ -76,6 +76,27 @@ public class EmployeeRepositoryImplTest {
     }
 
     @Nested
+    class 新規登録 {
+        @Test
+        void 指定した従業員情報を新規登録する() {
+            // arrange
+            Employee newEmployee = createEmployeeForRegister();
+            Optional<Employee> expected = Optional.of(createEmployeeForRegister());
+
+            // act
+            sut.register(newEmployee);
+
+            // assert
+            Optional<Employee> actual = sut.findById("3");
+            assertThat(actual).isEqualTo(expected);
+        }
+
+        private Employee createEmployeeForRegister() {
+            return new Employee(3L, "Hanako", "Shirato");
+        }
+    }
+
+    @Nested
     class ID採番 {
         @Test
         @DataSet(value = "datasets/employee/employees-setup.yml")
