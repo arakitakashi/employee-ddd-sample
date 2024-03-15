@@ -78,6 +78,7 @@ public class EmployeeRepositoryImplTest {
     @Nested
     class 新規登録 {
         @Test
+        @DataSet(value = "datasets/employee/employees-setup.yml")
         void 指定した従業員情報を新規登録する() {
             // arrange
             Employee newEmployee = createEmployeeForRegister();
@@ -93,6 +94,35 @@ public class EmployeeRepositoryImplTest {
 
         private Employee createEmployeeForRegister() {
             return new Employee(3L, "Hanako", "Shirato");
+        }
+    }
+
+    @Nested
+    class 更新 {
+        @Test
+        @DataSet(value = "datasets/employee/employees-setup.yml")
+        void 指定した従業員情報を更新する() {
+            // arrange
+            Optional<Employee> expected =
+                    Optional.of(
+                            createEmployeeForUpdate(1L)
+                    );
+            Employee employee = createEmployeeForUpdate(1L);
+
+            // act
+            sut.update(employee);
+
+            // assert
+            Optional<Employee> actual = sut.findById("1");
+            assertThat(actual).isEqualTo(expected);
+        }
+
+        private Employee createEmployeeForUpdate(long id) {
+            return new Employee(
+                    id,
+                    "Taro",
+                    "Suzuki"
+            );
         }
     }
 
