@@ -10,11 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.Optional;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
@@ -74,6 +76,24 @@ public class EmployeeControllerTest {
                     .body("id", is(employeeId))
                     .body("firstName", is("Yamada"))
                     .body("lastName", is("Taro"));
+        }
+    }
+
+    @Nested
+    class 新規登録 {
+        @Test
+        void 指定した従業員情報を登録する() throws Exception {
+            EmployeeRequest employeeRequest =
+                    new EmployeeRequest("Hanako", "Shirato");
+
+            given()
+                    .contentType("application/json")
+                    .body(employeeRequest)
+                    .when()
+                    .post("/v1/employees")
+                    .then()
+                    .statusCode(HttpStatus.CREATED.value())
+                    .header("Location", containsString("/v1/employees/3"));
         }
     }
 }
