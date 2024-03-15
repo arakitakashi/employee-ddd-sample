@@ -2,6 +2,7 @@ package com.sampleddd.employees.presentation;
 
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
+import com.sampleddd.employees.presentation.employee.EmployeeRequest;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -83,6 +84,10 @@ public class EmployeeControllerTest {
     class 新規登録 {
         @Test
         void 指定した従業員情報を登録する() throws Exception {
+            // arrange
+            when(employeeRepository.nextId()).thenReturn(3L);
+
+            // assert
             EmployeeRequest employeeRequest =
                     new EmployeeRequest("Hanako", "Shirato");
 
