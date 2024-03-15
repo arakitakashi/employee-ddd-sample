@@ -28,7 +28,7 @@ public interface EmployeeRepository {
      * @param employee
      * @return
      */
-    long register(Employee employee);
+    void register(Employee employee);
 
     /**
      * データベースから付番される次のIDの値を返します。

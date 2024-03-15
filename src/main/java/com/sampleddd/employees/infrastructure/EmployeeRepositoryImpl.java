@@ -63,6 +63,34 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void register(Employee employee) {
+        String query = """
+                INSERT INTO employees (id, first_name, last_name)
+                VALUES (:id, :firstName, :lastName) 
+                 """;
+
+        Map<String, Object> params = createParamsForRegister(employee);
+
+        try {
+            jdbcTemplate.update(query, params);
+        } catch (DataAccessException e) {
+            log.warn(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
+            throw e;
+        }
+    }
+
+    private Map<String, Object> createParamsForRegister(Employee employee) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("id", employee.id());
+        result.put("firstName", employee.firstName());
+        result.put("lastName", employee.lastName());
+        return result;
+    }
+
     @Override
     public long nextId() {
         String query = "SELECT NEXTVAL('EMPLOYEE_ID_SEQ')";
