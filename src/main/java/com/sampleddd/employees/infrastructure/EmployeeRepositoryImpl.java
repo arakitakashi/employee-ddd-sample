@@ -83,6 +83,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         }
     }
 
+    @Override
+    public void update(Employee employee) {
+
+    }
+
     private Map<String, Object> createParamsForRegister(Employee employee) {
         Map<String, Object> result = new HashMap<>();
         result.put("id", employee.id());

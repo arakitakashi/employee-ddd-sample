@@ -31,6 +31,13 @@ public interface EmployeeRepository {
     void register(Employee employee);
 
     /**
+     * 指定された従業員情報を更新します。
+     *
+     * @param employee 従業員情報。
+     */
+    void update(Employee employee);
+
+    /**
      * データベースから付番される次のIDの値を返します。
      *
      * @return 付番された新しいIDの値
