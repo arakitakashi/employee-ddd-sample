@@ -38,6 +38,19 @@ public class EmployeeControllerTest {
     }
 
     @Nested
+    class ルート {
+        @Test
+        void ルートURLにアクセスができる() {
+            // assert
+            given()
+                .when()
+                .get("/")
+                .then()
+                .statusCode(HttpStatus.OK.value());
+        }
+    }
+
+    @Nested
     class 参照 {
         @Test
         void 全ての従業員情報を取得する() throws Exception {
