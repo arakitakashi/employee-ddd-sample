@@ -111,6 +111,10 @@ public class EmployeeControllerTest {
                 "Yamada"
             );
 
+            when(employeeRepository.findById("1")).thenReturn(
+                Optional.of(new Employee(1L, "Taro", "Yamada"))
+            );
+
             given()
                 .contentType("application/json")
                 .body(employeeRequest)
