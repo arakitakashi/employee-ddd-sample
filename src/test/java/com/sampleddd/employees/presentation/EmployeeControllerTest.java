@@ -101,4 +101,31 @@ public class EmployeeControllerTest {
                     .header("Location", containsString("/v1/employees/3"));
         }
     }
+
+    @Nested
+    class 更新 {
+        @Test
+        void 指定したIDの従業員情報を更新する() throws Exception {
+            EmployeeRequest employeeRequest = new EmployeeRequest(
+                null,
+                "Yamada"
+            );
+
+            given()
+                .contentType("application/json")
+                .body(employeeRequest)
+                .patch("/v1/employees/1")
+                .then()
+                .statusCode(HttpStatus.NO_CONTENT.value());
+        }
+    }
+
+    @Nested
+    class 削除 {
+        @Test
+        void 指定したIDの従業員情報を削除する() {
+            given().delete("/v1/employees/{id}", "1").then()
+                .statusCode(HttpStatus.NO_CONTENT.value());
+        }
+    }
 }
