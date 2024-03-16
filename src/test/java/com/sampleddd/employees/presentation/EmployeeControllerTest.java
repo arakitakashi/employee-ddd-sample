@@ -16,6 +16,8 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -96,6 +98,30 @@ public class EmployeeControllerTest {
             given().contentType("application/json").body(employeeRequest).when()
                 .post("/v1/employees").then().statusCode(HttpStatus.CREATED.value())
                 .header("Location", containsString("/v1/employees/3"));
+        }
+
+        @ParameterizedTest(name = "{3}の場合")
+        @CsvSource(delimiter = '|', textBlock = """
+            # FIRST NAME | LAST NAME | MESSAGE                     | TESTNAME
+                      '' |    YAMADA | firstName must not be blank | 名前が空文字
+                    TARO |        '' | lastName must not be blank  | 名字が空文字
+            """)
+        void 指定した従業員情報が不正の場合エラーを返す(
+            String firstName,
+            String lastName,
+            String message,
+            String testName
+        ) {
+            EmployeeRequest employeeRequest = new EmployeeRequest(firstName, lastName);
+
+            given()
+                .contentType("application/json")
+                .body(employeeRequest)
+                .when()
+                .post("/v1/employees")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body("details[0]", is(message));
         }
     }
 
