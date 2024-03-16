@@ -2,6 +2,8 @@ package com.sampleddd.employees.presentation;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
@@ -61,6 +63,23 @@ public class EmployeeControllerTest {
             given().when().get("/v1/employees/{id}", employeeId).then().statusCode(200).assertThat()
                 .body("id", is(employeeId)).body("firstName", is("Yamada"))
                 .body("lastName", is("Taro"));
+        }
+
+        @Test
+        void 指定したIDの従業員情報が存在しない場合400コードを返す() {
+            // arrange
+            String invalidId = "99";
+
+            // assert
+            given()
+                .when()
+                .get("/v1/employees/{id}", invalidId)
+                .then()
+                .statusCode(400)
+                .assertThat()
+                .body("code", equalTo("0003"))
+                .body("message", equalTo("specified employee [id = 99] is not found."))
+                .body("details", empty());
         }
     }
 
