@@ -23,6 +23,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.http.HttpStatus;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -184,7 +185,7 @@ public class EmployeeControllerTest {
         void データベース接続に問題が生じた場合InternalServerErrorのレスポンスを返す() throws Exception {
             // arrange
             when(employeeRepository.findAll())
-                .thenThrow(DataAccessException.class);
+                .thenThrow(DataAccessResourceFailureException.class);
 
             // assert
             given()
