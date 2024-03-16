@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static com.sampleddd.employees.domain.exception.ExceptionMessages.DATABASE_ACCESS_ERROR_MESSAGE;
+import static com.sampleddd.employees.domain.exception.ExceptionMessages.EMPLOYEE_NOT_FOUND_MESSAGE;
 import static com.sampleddd.employees.domain.exception.ExceptionMessages.FAIL_GET_NEXT_ID_NUMBER_MESSAGE;
 
 /**
@@ -82,13 +83,44 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             throw e;
         }
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void update(Employee employee) {
+    public Optional<Employee> update(Employee employee) {
+        String query = """
+                UPDATE employees
+                SET
+                first_name = :firstName,
+                last_name = :lastName
+                WHERE id = :id
+                """;
 
+        Map<String, Object> params = createParamsForUpdate(employee);
+
+        try {
+            int affectedRows = jdbcTemplate.update(query, params);
+            if (affectedRows == 0) {
+                log.warn(EMPLOYEE_NOT_FOUND_MESSAGE.formattedMessage(employee.id()));
+                return Optional.empty();
+            }
+            return Optional.of(employee);
+        } catch (DataAccessException e) {
+            log.warn(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
+            throw e;
+        }
     }
 
     private Map<String, Object> createParamsForRegister(Employee employee) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("id", employee.id());
+        result.put("firstName", employee.firstName());
+        result.put("lastName", employee.lastName());
+        return result;
+    }
+
+    private Map<String, Object> createParamsForUpdate(Employee employee) {
         Map<String, Object> result = new HashMap<>();
         result.put("id", employee.id());
         result.put("firstName", employee.firstName());

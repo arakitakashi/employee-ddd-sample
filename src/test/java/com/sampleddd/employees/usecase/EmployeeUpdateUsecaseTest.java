@@ -31,7 +31,6 @@ public class EmployeeUpdateUsecaseTest {
         Employee employee = new Employee(employeeDto.id(), "Taro", employeeDto.lastName());
 
         when(employeeRepository.findById(String.valueOf(employeeDto.id()))).thenReturn(Optional.of(employee));
-        doNothing().when(employeeRepository).update(employee);
 
         // act
         sut.execute(employeeDto);

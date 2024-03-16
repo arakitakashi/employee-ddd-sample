@@ -35,7 +35,7 @@ public interface EmployeeRepository {
      *
      * @param employee 従業員情報。
      */
-    void update(Employee employee);
+    Optional<Employee> update(Employee employee);
 
     /**
      * データベースから付番される次のIDの値を返します。
