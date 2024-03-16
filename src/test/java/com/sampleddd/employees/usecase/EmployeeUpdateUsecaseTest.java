@@ -7,7 +7,6 @@ import com.sampleddd.employees.usecase.dto.EmployeeDto;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
@@ -51,7 +50,7 @@ public class EmployeeUpdateUsecaseTest {
                 .isInstanceOf(EmployeeNotFoundException.class)
                 .hasMessage("specified employee [id = 99] is not found.");
     }
-    
+
     private EmployeeDto createEmployeeDto(long id) {
         return new EmployeeDto(id, null, "Yamada");
     }

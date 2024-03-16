@@ -38,6 +38,14 @@ public interface EmployeeRepository {
     Optional<Employee> update(Employee employee);
 
     /**
+     * 指定されたIDの従業員情報を削除します。
+     *
+     * @param id ID。
+     * @return 削除の成否を表すブーリアン。
+     */
+    boolean delete(String id);
+
+    /**
      * データベースから付番される次のIDの値を返します。
      *
      * @return 付番された新しいIDの値
