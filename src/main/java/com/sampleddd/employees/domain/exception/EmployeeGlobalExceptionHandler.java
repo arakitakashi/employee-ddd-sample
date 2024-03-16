@@ -1,5 +1,7 @@
 package com.sampleddd.employees.domain.exception;
 
+import static com.sampleddd.employees.domain.exception.ExceptionMessages.UNEXPECTED_ERROR_MESSAGE_FOR_RESPONSE;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -66,6 +68,21 @@ public class EmployeeGlobalExceptionHandler {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put(KEY_OF_CODE, "0001");
         body.put(KEY_OF_MESSAGE, "data access error occurred.");
+
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * 予期しない例外を捕捉する汎用のエラーハンドラです。クライアントにはInternalServerErrorと共にエラー情報を返します。
+     *
+     * @param e 発生した例外
+     * @return エラー情報を含むレスポンスエンティティ
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleUnexpectedExceptions(Exception e) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put(KEY_OF_CODE, "9999");
+        body.put(KEY_OF_MESSAGE, UNEXPECTED_ERROR_MESSAGE_FOR_RESPONSE.message());
 
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }

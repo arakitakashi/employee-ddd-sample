@@ -2,6 +2,11 @@ package com.sampleddd.employees.domain.exception;
 
 public enum ExceptionMessages {
     /**
+     * 予期しないエラーが発生した場合にクライアントに返すレスポンスに使用します。
+     */
+    UNEXPECTED_ERROR_MESSAGE_FOR_RESPONSE("system error has occurred."),
+
+    /**
      * IDに対応する従業員情報が存在しない場合に使用します。
      */
     EMPLOYEE_NOT_FOUND_MESSAGE("specified employee [id = %s] is not found."),
