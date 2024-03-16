@@ -83,7 +83,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             throw e;
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -110,6 +110,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             log.warn(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
             throw e;
         }
+    }
+
+    @Override
+    public boolean delete(String id) {
+        return false;
     }
 
     private Map<String, Object> createParamsForRegister(Employee employee) {

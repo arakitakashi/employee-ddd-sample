@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class EmployeeDeleteUsecaseTest {
@@ -21,6 +22,9 @@ public class EmployeeDeleteUsecaseTest {
     void 指定したIDの従業員情報を削除する() {
         // arrange
         String employeeId = "1";
+
+        when(employeeRepository.delete(employeeId))
+                .thenReturn(true);
 
         // execute
         sut.execute(employeeId);
