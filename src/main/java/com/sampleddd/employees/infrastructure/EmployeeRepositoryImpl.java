@@ -1,7 +1,15 @@
 package com.sampleddd.employees.infrastructure;
 
+import static com.sampleddd.employees.domain.exception.ExceptionMessages.DATABASE_ACCESS_ERROR_MESSAGE;
+import static com.sampleddd.employees.domain.exception.ExceptionMessages.EMPLOYEE_NOT_FOUND_MESSAGE;
+import static com.sampleddd.employees.domain.exception.ExceptionMessages.FAIL_GET_NEXT_ID_NUMBER_MESSAGE;
+
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
@@ -9,15 +17,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import static com.sampleddd.employees.domain.exception.ExceptionMessages.DATABASE_ACCESS_ERROR_MESSAGE;
-import static com.sampleddd.employees.domain.exception.ExceptionMessages.EMPLOYEE_NOT_FOUND_MESSAGE;
-import static com.sampleddd.employees.domain.exception.ExceptionMessages.FAIL_GET_NEXT_ID_NUMBER_MESSAGE;
 
 /**
  * {@link EmployeeRepository}のJDBCによる実装。 従業員情報のデータベース操作を担います。
@@ -119,7 +118,24 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
      */
     @Override
     public boolean delete(String id) {
-        return false;
+        String query = "DELETE FROM employees WHERE id = :id";
+
+        Map<String, Object> params = createParamsForDelete(id);
+
+        try {
+            int affectedRows = jdbcTemplate.update(query, params);
+            return affectedRows > 0;
+        } catch (DataAccessException e) {
+            log.warn(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
+            throw e;
+        }
+
+    }
+
+    private Map<String, Object> createParamsForDelete(String id) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("id", Integer.parseInt(id));
+        return result;
     }
 
     private Map<String, Object> createParamsForRegister(Employee employee) {
@@ -144,8 +160,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
         try {
             return Optional.ofNullable(
-                jdbcTemplate.queryForObject(query, new HashMap<>(), Long.class)
-            ).orElseThrow(
+                jdbcTemplate.queryForObject(query, new HashMap<>(), Long.class)).orElseThrow(
                 () -> new IllegalStateException(FAIL_GET_NEXT_ID_NUMBER_MESSAGE.message()));
         } catch (DataAccessException e) {
             log.warn(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
