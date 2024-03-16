@@ -104,7 +104,9 @@ public class EmployeeControllerTest {
         @CsvSource(delimiter = '|', textBlock = """
             # FIRST NAME | LAST NAME | MESSAGE                     | TESTNAME
                       '' |    YAMADA | firstName must not be blank | 名前が空文字
-                    TARO |        '' | lastName must not be blank  | 名字が空文字
+                         |    YAMADA | firstName must not be blank | 名前がnull
+                    TARO |           | lastName must not be blank  | 名字が空文字
+                    TARO |        '' | lastName must not be blank  | 名字がnull
             """)
         void 指定した従業員情報が不正の場合エラーを返す(
             String firstName,
