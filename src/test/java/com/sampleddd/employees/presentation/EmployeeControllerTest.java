@@ -106,6 +106,9 @@ public class EmployeeControllerTest {
     class 削除 {
         @Test
         void 指定したIDの従業員情報を削除する() {
+            // arrange
+            when(employeeRepository.delete("1")).thenReturn(true);
+            // assert
             given().delete("/v1/employees/{id}", "1").then()
                 .statusCode(HttpStatus.NO_CONTENT.value());
         }

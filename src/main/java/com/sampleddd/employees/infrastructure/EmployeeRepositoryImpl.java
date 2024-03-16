@@ -36,7 +36,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         String query = "SELECT id, first_name, last_name FROM employees";
 
         try {
-            return jdbcTemplate.query(query, new DataClassRowMapper<>(EmployeeRecord.class)).stream().map(this::mapToEmployee).toList();
+            return jdbcTemplate.query(query, new DataClassRowMapper<>(EmployeeRecord.class))
+                .stream().map(this::mapToEmployee).toList();
         } catch (DataAccessException e) {
             log.warn(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
             throw e;
@@ -54,7 +55,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         params.put("id", Integer.parseInt(id));
 
         try {
-            EmployeeRecord employeeRecord = jdbcTemplate.queryForObject(query, params, new DataClassRowMapper<>(EmployeeRecord.class));
+            EmployeeRecord employeeRecord = jdbcTemplate.queryForObject(query, params,
+                new DataClassRowMapper<>(EmployeeRecord.class));
             return Optional.ofNullable(mapToEmployee(employeeRecord));
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
@@ -70,9 +72,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     public void register(Employee employee) {
         String query = """
-                INSERT INTO employees (id, first_name, last_name)
-                VALUES (:id, :firstName, :lastName) 
-                 """;
+            INSERT INTO employees (id, first_name, last_name)
+            VALUES (:id, :firstName, :lastName) 
+             """;
 
         Map<String, Object> params = createParamsForRegister(employee);
 
@@ -90,12 +92,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     public Optional<Employee> update(Employee employee) {
         String query = """
-                UPDATE employees
-                SET
-                first_name = :firstName,
-                last_name = :lastName
-                WHERE id = :id
-                """;
+            UPDATE employees
+            SET
+            first_name = :firstName,
+            last_name = :lastName
+            WHERE id = :id
+            """;
 
         Map<String, Object> params = createParamsForUpdate(employee);
 
@@ -112,6 +114,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(String id) {
         return false;
@@ -139,8 +144,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
         try {
             return Optional.ofNullable(
-                    jdbcTemplate.queryForObject(query, new HashMap<>(), Long.class)
-            ).orElseThrow(() -> new IllegalStateException(FAIL_GET_NEXT_ID_NUMBER_MESSAGE.message()));
+                jdbcTemplate.queryForObject(query, new HashMap<>(), Long.class)
+            ).orElseThrow(
+                () -> new IllegalStateException(FAIL_GET_NEXT_ID_NUMBER_MESSAGE.message()));
         } catch (DataAccessException e) {
             log.warn(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
             throw e;
@@ -148,6 +154,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     private Employee mapToEmployee(EmployeeRecord employeeRecord) {
-        return new Employee(employeeRecord.id(), employeeRecord.firstName(), employeeRecord.lastName());
+        return new Employee(employeeRecord.id(), employeeRecord.firstName(),
+            employeeRecord.lastName());
     }
 }

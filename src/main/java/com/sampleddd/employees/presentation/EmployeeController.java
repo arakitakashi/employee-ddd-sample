@@ -3,6 +3,7 @@ package com.sampleddd.employees.presentation;
 import com.sampleddd.employees.presentation.employee.EmployeeRequest;
 import com.sampleddd.employees.presentation.employee.EmployeeResponse;
 import com.sampleddd.employees.presentation.employee.EmployeeResponses;
+import com.sampleddd.employees.usecase.EmployeeDeleteUsecase;
 import com.sampleddd.employees.usecase.EmployeeGetAllUsecase;
 import com.sampleddd.employees.usecase.EmployeeGetByIdUsecase;
 import com.sampleddd.employees.usecase.EmployeeRegisterUsecase;
@@ -11,6 +12,7 @@ import com.sampleddd.employees.usecase.dto.EmployeeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +32,7 @@ public class EmployeeController {
     private final EmployeeGetByIdUsecase employeeGetByIdUsecase;
     private final EmployeeRegisterUsecase employeeRegisterUsecase;
     private final EmployeeUpdateUsecase employeeUpdateUsecase;
+    private final EmployeeDeleteUsecase employeeDeleteUsecase;
 
     /**
      * 全ての従業員情報を取得します。
@@ -98,6 +101,19 @@ public class EmployeeController {
         employeeUpdateUsecase.execute(
             new EmployeeDto(Long.parseLong(id), employeeRequest.firstName(),
                 employeeRequest.lastName()));
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * 指定されたIDの従業員情報を削除します。 削除に成功すると 204 No Contentを返します。
+     *
+     * @param id ID。
+     * @return レスポンスエンティティ
+     */
+    @DeleteMapping("/v1/employees/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<Void> deleteEmployee(@PathVariable String id) {
+        employeeDeleteUsecase.execute(id);
         return ResponseEntity.noContent().build();
     }
 }

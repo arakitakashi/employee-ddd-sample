@@ -8,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 import static io.micrometer.common.util.StringUtils.isBlank;
 
 
@@ -26,7 +24,7 @@ public class EmployeeUpdateUsecase {
      */
     public void execute(EmployeeDto employeeDto) {
         Employee existingEmployee = employeeRepository.findById(String.valueOf(employeeDto.id()))
-                .orElseThrow(() -> new EmployeeNotFoundException(String.valueOf(employeeDto.id())));
+            .orElseThrow(() -> new EmployeeNotFoundException(String.valueOf(employeeDto.id())));
         Employee employee = dtoToEmployee(existingEmployee, employeeDto);
 
         employeeRepository.update(employee);
@@ -34,12 +32,12 @@ public class EmployeeUpdateUsecase {
 
     private Employee dtoToEmployee(Employee existingEmployee, EmployeeDto employeeDto) {
         String updateFirstName =
-                !isBlank(employeeDto.firstName()) ? employeeDto.firstName()
-                        : existingEmployee.firstName();
+            !isBlank(employeeDto.firstName()) ? employeeDto.firstName()
+                : existingEmployee.firstName();
 
         String updateLastName =
-                !isBlank(employeeDto.lastName()) ? employeeDto.lastName()
-                        : existingEmployee.lastName();
+            !isBlank(employeeDto.lastName()) ? employeeDto.lastName()
+                : existingEmployee.lastName();
 
         return new Employee(existingEmployee.id(), updateFirstName, updateLastName);
     }
