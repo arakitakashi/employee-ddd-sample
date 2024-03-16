@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootTest
 @DBRider
@@ -33,6 +34,9 @@ public class EmployeeRepositoryImplTest {
 
     @Autowired
     EmployeeRepository sut;
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     @BeforeAll
     static void setUpAll() {
@@ -161,13 +165,19 @@ public class EmployeeRepositoryImplTest {
         @DataSet(value = "datasets/employee/employees-setup.yml")
         void 新規でIDのためのナンバーを採番する() {
             // arrange
-            long expected = 3L;
+            long expected = 1L;
+
+            resetSequence();
 
             // act
             long actual = sut.nextId();
 
             // assert
             assertThat(actual).isEqualTo(expected);
+        }
+
+        private void resetSequence() {
+            jdbcTemplate.execute("ALTER SEQUENCE EMPLOYEE_ID_SEQ RESTART WITH 1");
         }
     }
 }
