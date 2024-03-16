@@ -140,6 +140,19 @@ public class EmployeeRepositoryImplTest {
             // assert
             assertThat(actual).isTrue();
         }
+
+        @Test
+        @DataSet(value = "datasets/employee/employees-setup.yml")
+        void 指定したIDの従業員情報が存在しない場合falseを返す() {
+            // arrange
+            String employeeId = "99";
+
+            // act
+            boolean actual = sut.delete(employeeId);
+
+            // assert
+            assertThat(actual).isFalse();
+        }
     }
 
     @Nested
