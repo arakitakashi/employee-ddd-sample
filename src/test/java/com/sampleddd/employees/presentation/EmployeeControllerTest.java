@@ -22,7 +22,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.http.HttpStatus;
 
@@ -195,6 +194,22 @@ public class EmployeeControllerTest {
                 .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .body("code", is("0001"))
                 .body("message", is("data access error occurred."));
+        }
+
+        @Test
+        void 予期しない例外が発生した場合InternalServerErrorのレスポンスを返す() throws Exception {
+            // setup
+            when(employeeRepository.findAll())
+                .thenThrow(NullPointerException.class);
+
+            // assert
+            given()
+                .when()
+                .get("v1/employees")
+                .then()
+                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .body("code", is("9999"))
+                .body("message", is("system error has occurred."));
         }
     }
 }
