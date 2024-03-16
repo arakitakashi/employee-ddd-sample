@@ -112,8 +112,11 @@ public class EmployeeControllerTest {
             String message,
             String testName
         ) {
+            // arrange
             EmployeeRequest employeeRequest = new EmployeeRequest(firstName, lastName);
+            when(employeeRepository.nextId()).thenReturn(3L);
 
+            // assert
             given()
                 .contentType("application/json")
                 .body(employeeRequest)

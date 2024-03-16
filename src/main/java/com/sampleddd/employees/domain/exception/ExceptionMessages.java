@@ -9,37 +9,37 @@ public enum ExceptionMessages {
     /**
      * AddressRepositoryで発番されたID番号が取得できなかった場合に使用します。
      */
-    FAIL_GET_NEXT_ID_NUMBER_MESSAGE("Failed to fetch next address ID from sequence."),
+    FAIL_GET_NEXT_ID_NUMBER_MESSAGE("failed to fetch next address ID from sequence."),
 
     /**
      * ID が正の値でない場合に使用します。
      */
-    ID_NOT_POSITIVE_VALUE_MESSAGE("Employee ID must be positive"),
+    ID_NOT_POSITIVE_VALUE_MESSAGE("employee ID must be positive"),
 
     /**
      * IDの最大長を超えた場合に使用します。
      */
-    ID_MAX_LENGTH_EXCEEDED_MESSAGE("Employee ID must not exceed the maximum length"),
+    ID_MAX_LENGTH_EXCEEDED_MESSAGE("employee ID must not exceed the maximum length"),
 
     /**
      * 名が空またはNullだった場合に使用します。
      */
-    FIRST_NAME_NOT_BLANK_MESSAGE("First name must not be blank"),
+    FIRST_NAME_NOT_BLANK_MESSAGE("firstName must not be blank"),
 
     /**
      * 名の最大長を超えた場合に使用します。
      */
-    FIRST_NAME_MAX_LENGTH_EXCEEDED_MESSAGE("First name must not exceed the maximum length"),
+    FIRST_NAME_MAX_LENGTH_EXCEEDED_MESSAGE("firstName must not exceed the maximum length"),
 
     /**
      * 姓が空またはNullだった場合に使用します。
      */
-    LAST_NAME_NOT_BLANK_MESSAGE("Last name must not be blank"),
+    LAST_NAME_NOT_BLANK_MESSAGE("lastName must not be blank"),
 
     /**
      * 姓の最大長を超えた場合に使用します。
      */
-    LAST_NAME_MAX_LENGTH_EXCEEDED_MESSAGE("Last name must not exceed the maximum length"),
+    LAST_NAME_MAX_LENGTH_EXCEEDED_MESSAGE("lastName must not exceed the maximum length"),
 
     /**
      * DataAccessException発生時のログ出力に使用します。
