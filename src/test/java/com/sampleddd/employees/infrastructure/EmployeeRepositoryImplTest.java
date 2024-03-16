@@ -25,11 +25,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 @DBUnit(cacheConnection = false)
 public class EmployeeRepositoryImplTest {
     private static final String DB_URL =
-            "jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false";
+        "jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false";
     private static final String DB_USER = "utuser";
     private static final String DB_PASSWORD = "utpassword";
     private static final ConnectionHolder connectionHolder =
-            () -> DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        () -> DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
     @Autowired
     EmployeeRepository sut;
@@ -64,7 +64,7 @@ public class EmployeeRepositoryImplTest {
         void 指定されたIdの住所情報を取得する() {
             // arrange
             Optional<Employee> expected = Optional.of(
-                    new Employee(1L, "Taro", "Yamada")
+                new Employee(1L, "Taro", "Yamada")
             );
 
             // act
@@ -104,9 +104,9 @@ public class EmployeeRepositoryImplTest {
         void 指定した従業員情報を更新する() {
             // arrange
             Optional<Employee> expected =
-                    Optional.of(
-                            createEmployeeForUpdate(1L)
-                    );
+                Optional.of(
+                    createEmployeeForUpdate(1L)
+                );
             Employee employee = createEmployeeForUpdate(1L);
 
             // act
@@ -119,10 +119,26 @@ public class EmployeeRepositoryImplTest {
 
         private Employee createEmployeeForUpdate(long id) {
             return new Employee(
-                    id,
-                    "Taro",
-                    "Suzuki"
+                id,
+                "Taro",
+                "Suzuki"
             );
+        }
+    }
+
+    @Nested
+    class 削除 {
+        @Test
+        @DataSet(value = "datasets/employee/employees-setup.yml")
+        void 指定したIDの従業員情報の削除に成功するとtrueを返す() {
+            // arrange
+            String employeeId = "2";
+
+            // act
+            boolean actual = sut.delete(employeeId);
+
+            // assert
+            assertThat(actual).isTrue();
         }
     }
 
