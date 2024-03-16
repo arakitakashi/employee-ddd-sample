@@ -35,6 +35,16 @@ public class EmployeeController {
     private final EmployeeDeleteUsecase employeeDeleteUsecase;
 
     /**
+     * アプリケーションのルートエンドポイントに対するレスポンスを提供します。
+     *
+     * @return レスポンスエンティティ
+     */
+    @GetMapping("/")
+    public ResponseEntity<Void> getRoor() {
+        return ResponseEntity.ok().build();
+    }
+
+    /**
      * 全ての従業員情報を取得します。
      *
      * @return 従業員情報のリスト
