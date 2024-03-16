@@ -22,6 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -174,6 +175,25 @@ public class EmployeeControllerTest {
             // assert
             given().delete("/v1/employees/{id}", "1").then()
                 .statusCode(HttpStatus.NO_CONTENT.value());
+        }
+    }
+
+    @Nested
+    class 共通エラー {
+        @Test
+        void データベース接続に問題が生じた場合InternalServerErrorのレスポンスを返す() throws Exception {
+            // arrange
+            when(employeeRepository.findAll())
+                .thenThrow(DataAccessException.class);
+
+            // assert
+            given()
+                .when()
+                .get("/v1/employees")
+                .then()
+                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .body("code", is("0001"))
+                .body("message", is("data access error occurred."));
         }
     }
 }
