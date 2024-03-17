@@ -75,7 +75,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             VALUES (:id, :firstName, :lastName) 
              """;
 
-        Map<String, Object> params = createParamsForRegister(employee);
+        Map<String, Object> params = createParams(employee);
 
         try {
             jdbcTemplate.update(query, params);
@@ -98,7 +98,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             WHERE id = :id
             """;
 
-        Map<String, Object> params = createParamsForUpdate(employee);
+        Map<String, Object> params = createParams(employee);
 
         try {
             int affectedRows = jdbcTemplate.update(query, params);
@@ -138,15 +138,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         return result;
     }
 
-    private Map<String, Object> createParamsForRegister(Employee employee) {
-        Map<String, Object> result = new HashMap<>();
-        result.put("id", employee.id());
-        result.put("firstName", employee.firstName());
-        result.put("lastName", employee.lastName());
-        return result;
-    }
-
-    private Map<String, Object> createParamsForUpdate(Employee employee) {
+    private Map<String, Object> createParams(Employee employee) {
         Map<String, Object> result = new HashMap<>();
         result.put("id", employee.id());
         result.put("firstName", employee.firstName());

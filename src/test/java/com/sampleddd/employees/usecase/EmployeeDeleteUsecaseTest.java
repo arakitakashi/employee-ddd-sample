@@ -11,7 +11,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class EmployeeDeleteUsecaseTest {
+class EmployeeDeleteUsecaseTest {
     @InjectMocks
     EmployeeDeleteUsecase sut;
 
@@ -24,7 +24,7 @@ public class EmployeeDeleteUsecaseTest {
         String employeeId = "1";
 
         when(employeeRepository.delete(employeeId))
-                .thenReturn(true);
+            .thenReturn(true);
 
         // execute
         sut.execute(employeeId);

@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
-public class EmployeeUpdateUsecaseTest {
+class EmployeeUpdateUsecaseTest {
     @InjectMocks
     EmployeeUpdateUsecase sut;
 
@@ -31,7 +31,8 @@ public class EmployeeUpdateUsecaseTest {
         EmployeeDto employeeDto = createEmployeeDto(1L);
         Employee employee = new Employee(employeeDto.id(), "Taro", employeeDto.lastName());
 
-        when(employeeRepository.findById(String.valueOf(employeeDto.id()))).thenReturn(Optional.of(employee));
+        when(employeeRepository.findById(String.valueOf(employeeDto.id()))).thenReturn(
+            Optional.of(employee));
 
         // act
         sut.execute(employeeDto);
@@ -47,8 +48,8 @@ public class EmployeeUpdateUsecaseTest {
 
         // assert;
         assertThatThrownBy(() -> sut.execute(employeeDto))
-                .isInstanceOf(EmployeeNotFoundException.class)
-                .hasMessage("specified employee [id = 99] is not found.");
+            .isInstanceOf(EmployeeNotFoundException.class)
+            .hasMessage("specified employee [id = 99] is not found.");
     }
 
     private EmployeeDto createEmployeeDto(long id) {

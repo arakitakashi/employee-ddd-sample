@@ -6,7 +6,10 @@ import com.sampleddd.employees.usecase.dto.EmployeeDto;
 /**
  * EmployeeオブジェクトをEmployeeDtoに変換するクラス。
  */
-public class EmployeeToDtoConverter {
+final class EmployeeToDtoConverter {
+    private EmployeeToDtoConverter() {
+    }
+
     /**
      * EmployeeオブジェクトをEmployeeDtoに変換して返します。
      *
