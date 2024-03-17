@@ -9,7 +9,7 @@ public class EmployeeNotFoundException extends RuntimeException {
     /**
      * 指定されたメッセージを持つ{@link EmployeeNotFoundException}を構築します。
      *
-     * @param id
+     * @param id ID。
      */
     public EmployeeNotFoundException(String id) {
         super(EMPLOYEE_NOT_FOUND_MESSAGE.formattedMessage(id));

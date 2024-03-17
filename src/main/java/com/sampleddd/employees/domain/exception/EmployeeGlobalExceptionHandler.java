@@ -14,6 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * 従業員情報の例外をグローバルに処理するクラス。アプリケーション全体で発生する特定の例外に対して、共通のレスポンス形式を提供します。
+ */
 @ControllerAdvice
 @Slf4j
 public class EmployeeGlobalExceptionHandler {

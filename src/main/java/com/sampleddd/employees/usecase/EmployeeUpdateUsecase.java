@@ -1,5 +1,7 @@
 package com.sampleddd.employees.usecase;
 
+import static io.micrometer.common.util.StringUtils.isBlank;
+
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
 import com.sampleddd.employees.domain.exception.EmployeeNotFoundException;
@@ -8,9 +10,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import static io.micrometer.common.util.StringUtils.isBlank;
-
-
+/**
+ * 指定されたIDの従業員情報の更新を行うユースケースクラス。リポジトリを利用して、操作を行います。
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j

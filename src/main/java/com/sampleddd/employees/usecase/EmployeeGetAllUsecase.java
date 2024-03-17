@@ -7,6 +7,9 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/**
+ * 従業員情報の全件取得を行うユースケースクラス。リポジトリを利用して、操作を行います。
+ */
 @Service
 @RequiredArgsConstructor
 public class EmployeeGetAllUsecase {

@@ -1,5 +1,8 @@
 package com.sampleddd.employees.domain.exception;
 
+/**
+ * 例外メッセージの管理クラス。
+ */
 public enum ExceptionMessages {
     /**
      * 予期しないエラーが発生した場合にクライアントに返すレスポンスに使用します。

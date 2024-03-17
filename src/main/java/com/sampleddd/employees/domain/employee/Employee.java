@@ -26,10 +26,20 @@ public record Employee(long id, String firstName, String lastName) {
      */
     public Employee {
         if (id <= 0) throw new IllegalArgumentException(ID_NOT_POSITIVE_VALUE_MESSAGE.message());
-        if (String.valueOf(id).length() > ID_MAX_LENGTH) throw new IllegalArgumentException(ID_MAX_LENGTH_EXCEEDED_MESSAGE.message());
-        if (isBlank(firstName)) throw new IllegalArgumentException(FIRST_NAME_NOT_BLANK_MESSAGE.message());
-        if (String.valueOf(firstName).length() > FIRST_NAME_MAX_LENGTH) throw new IllegalArgumentException(FIRST_NAME_MAX_LENGTH_EXCEEDED_MESSAGE.message());
-        if (isBlank(lastName)) throw new IllegalArgumentException(LAST_NAME_NOT_BLANK_MESSAGE.message());
-        if (String.valueOf(lastName).length() > LAST_NAME_MAX_LENGTH) throw new IllegalArgumentException(LAST_NAME_MAX_LENGTH_EXCEEDED_MESSAGE.message());
+        if (String.valueOf(id).length() > ID_MAX_LENGTH) {
+            throw new IllegalArgumentException(ID_MAX_LENGTH_EXCEEDED_MESSAGE.message());
+        }
+        if (isBlank(firstName)) {
+            throw new IllegalArgumentException(FIRST_NAME_NOT_BLANK_MESSAGE.message());
+        }
+        if (firstName.length() > FIRST_NAME_MAX_LENGTH) {
+            throw new IllegalArgumentException(FIRST_NAME_MAX_LENGTH_EXCEEDED_MESSAGE.message());
+        }
+        if (isBlank(lastName)) {
+            throw new IllegalArgumentException(LAST_NAME_NOT_BLANK_MESSAGE.message());
+        }
+        if (lastName.length() > LAST_NAME_MAX_LENGTH) {
+            throw new IllegalArgumentException(LAST_NAME_MAX_LENGTH_EXCEEDED_MESSAGE.message());
+        }
     }
 }

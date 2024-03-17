@@ -25,8 +25,7 @@ public interface EmployeeRepository {
     /**
      * 指定された従業員情報を登録します。
      *
-     * @param employee
-     * @return
+     * @param employee 従業員情報。
      */
     void register(Employee employee);
 

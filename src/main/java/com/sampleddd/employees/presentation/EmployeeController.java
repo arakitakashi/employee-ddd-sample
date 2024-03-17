@@ -9,6 +9,8 @@ import com.sampleddd.employees.usecase.EmployeeGetByIdUsecase;
 import com.sampleddd.employees.usecase.EmployeeRegisterUsecase;
 import com.sampleddd.employees.usecase.EmployeeUpdateUsecase;
 import com.sampleddd.employees.usecase.dto.EmployeeDto;
+import java.net.URI;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +24,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
-import java.util.List;
-
+/**
+ * 従業員情報に関する操作を提供するコントローラー。このクラスは従業員情報の検索、登録、更新、削除のためのエンドポイントを提供します。
+ */
 @RequiredArgsConstructor
 @RestController
 public class EmployeeController {
