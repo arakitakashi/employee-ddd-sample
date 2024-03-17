@@ -1,11 +1,13 @@
 package com.sampleddd.employees.domain.exception;
 
+import static com.sampleddd.employees.domain.exception.ExceptionMessages.UNEXPECTED_ERROR_MESSAGE_FOR_LOG;
 import static com.sampleddd.employees.domain.exception.ExceptionMessages.UNEXPECTED_ERROR_MESSAGE_FOR_RESPONSE;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
+@Slf4j
 public class EmployeeGlobalExceptionHandler {
     private static final String KEY_OF_CODE = "code";
     private static final String KEY_OF_MESSAGE = "message";
@@ -80,6 +83,9 @@ public class EmployeeGlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleUnexpectedExceptions(Exception e) {
+        log.error(UNEXPECTED_ERROR_MESSAGE_FOR_LOG.message());
+        log.debug("Detail: " + e.getMessage());
+
         Map<String, Object> body = new LinkedHashMap<>();
         body.put(KEY_OF_CODE, "9999");
         body.put(KEY_OF_MESSAGE, UNEXPECTED_ERROR_MESSAGE_FOR_RESPONSE.message());

@@ -7,6 +7,11 @@ public enum ExceptionMessages {
     UNEXPECTED_ERROR_MESSAGE_FOR_RESPONSE("system error has occurred."),
 
     /**
+     * 予期しないエラーが発生した場合のログ出力に使用します。
+     */
+    UNEXPECTED_ERROR_MESSAGE_FOR_LOG("an unexpected error has occurred."),
+
+    /**
      * IDに対応する従業員情報が存在しない場合に使用します。
      */
     EMPLOYEE_NOT_FOUND_MESSAGE("specified employee [id = %s] is not found."),
