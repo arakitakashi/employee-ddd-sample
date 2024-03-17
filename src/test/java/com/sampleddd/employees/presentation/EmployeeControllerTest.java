@@ -5,19 +5,35 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.Appender;
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
+import com.sampleddd.employees.domain.exception.EmployeeGlobalExceptionHandler;
 import com.sampleddd.employees.presentation.employee.EmployeeRequest;
 import io.restassured.RestAssured;
 import java.util.List;
 import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.event.LoggingEvent;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -27,6 +43,12 @@ import org.springframework.http.HttpStatus;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class EmployeeControllerTest {
+    @Mock
+    Appender<ILoggingEvent> appender;
+
+    @Captor
+    ArgumentCaptor<ILoggingEvent> captor;
+
     @MockBean
     EmployeeRepository employeeRepository;
 
@@ -210,6 +232,46 @@ public class EmployeeControllerTest {
                 .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .body("code", is("9999"))
                 .body("message", is("system error has occurred."));
+        }
+
+        @Test
+        void 予期しない例外が発生した場合ログを出力する() throws Exception {
+            // setup
+            MockitoAnnotations.openMocks(this);
+            LoggerContext loggerContext = getLoggerContext();
+
+            Mockito.when(employeeRepository.findAll())
+                .thenThrow(NullPointerException.class);
+
+            // assert
+            given()
+                .when()
+                .get("v1/addresses")
+                .then()
+                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+
+            assertLogMessage();
+
+            loggerContext.getLogger(EmployeeGlobalExceptionHandler.class)
+                .detachAppender(appender);
+        }
+
+        @NotNull
+        private LoggerContext getLoggerContext() {
+            Logger logger = LoggerFactory.getLogger(EmployeeGlobalExceptionHandler.class);
+            appender = mock(Appender.class);
+
+            LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
+            loggerContext.getLogger(EmployeeGlobalExceptionHandler.class).addAppender(appender);
+            loggerContext.getLogger(EmployeeGlobalExceptionHandler.class).setAdditive(false);
+            return loggerContext;
+        }
+
+        private void assertLogMessage() {
+            verify(appender).doAppend(captor.capture());
+            assertThat(captor.getValue().getLevel()).hasToString("ERROR");
+            assertThat(captor.getValue().getMessage()).contains(
+                "an unexpected error has occurred.");
         }
     }
 }
