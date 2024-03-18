@@ -10,7 +10,7 @@ public interface EmployeeRepository {
     /**
      * 全ての従業員情報を取得します。
      *
-     * @return 従業員情報のリスト
+     * @return 従業員情報のリスト。
      */
     List<Employee> findAll();
 
@@ -33,7 +33,7 @@ public interface EmployeeRepository {
      * 指定された従業員情報を更新します。
      *
      * @param employee 従業員情報。
-     * @return オプショナルの従業員情報
+     * @return オプショナルの従業員情報。
      */
     Optional<Employee> update(Employee employee);
 
@@ -48,7 +48,7 @@ public interface EmployeeRepository {
     /**
      * データベースから付番される次のIDの値を返します。
      *
-     * @return 付番された新しいIDの値
+     * @return 付番された新しいIDの値。
      */
     long nextId();
 }

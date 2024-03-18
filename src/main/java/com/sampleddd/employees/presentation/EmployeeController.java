@@ -39,7 +39,7 @@ public class EmployeeController {
     /**
      * アプリケーションのルートエンドポイントに対するレスポンスを提供します。
      *
-     * @return レスポンスエンティティ
+     * @return レスポンスエンティティ。
      */
     @GetMapping("/")
     public ResponseEntity<Void> getRoor() {
@@ -49,7 +49,7 @@ public class EmployeeController {
     /**
      * 全ての従業員情報を取得します。
      *
-     * @return 従業員情報のリスト
+     * @return 従業員情報のリスト。
      */
     @GetMapping("v1/employees")
     @ResponseStatus(HttpStatus.OK)
@@ -68,7 +68,7 @@ public class EmployeeController {
      * 指定されたIDの従業員情報を取得します。存在しない場合は404 Not Foundを返します。
      *
      * @param id ID。
-     * @return 従業員情報
+     * @return 従業員情報。
      */
     @GetMapping("v1/employees/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -81,7 +81,7 @@ public class EmployeeController {
      * 新しい従業員情報を登録します。登録に成功すると201 Created とともに従業員情報のURIを返します。
      *
      * @param employeeRequest 新規従業員情報。
-     * @return 登録された従業員情報のURIを含むレスポンスエンティティ
+     * @return 登録された従業員情報のURIを含むレスポンスエンティティ。
      */
     @PostMapping("/v1/employees")
     @ResponseStatus(HttpStatus.CREATED)
@@ -120,7 +120,7 @@ public class EmployeeController {
      * 指定されたIDの従業員情報を削除します。 削除に成功すると 204 No Contentを返します。
      *
      * @param id ID。
-     * @return レスポンスエンティティ
+     * @return レスポンスエンティティ。
      */
     @DeleteMapping("/v1/employees/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

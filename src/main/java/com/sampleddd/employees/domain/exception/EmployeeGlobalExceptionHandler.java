@@ -27,8 +27,8 @@ public class EmployeeGlobalExceptionHandler {
     /**
      * {@link EmployeeNotFoundException} が発生した場合の処理を行います。 クライアントにはBadRequestと共にエラー情報を返します。
      *
-     * @param e 発生した{@link EmployeeNotFoundException}
-     * @return エラー情報を含むレスポンスエンティティ
+     * @param e 発生した{@link EmployeeNotFoundException}。
+     * @return エラー情報を含むレスポンスエンティティ。
      */
     @ExceptionHandler(EmployeeNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleEmployeeNotFoundException(
@@ -45,8 +45,8 @@ public class EmployeeGlobalExceptionHandler {
     /**
      * 入力値が不正の場合の例外{@link IllegalArgumentException} を処理します。バリデーションエラーの詳細をクライアントに返します。
      *
-     * @param e 発生した {@link IllegalArgumentException}
-     * @return バリデーションエラー情報を含むレスポンスエンティティ
+     * @param e 発生した {@link IllegalArgumentException}。
+     * @return バリデーションエラー情報を含むレスポンスエンティティ。
      */
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, Object>> handleIllegalArgumentException(
@@ -64,7 +64,7 @@ public class EmployeeGlobalExceptionHandler {
     /**
      * {@link DataAccessException}が発生した場合の処理を行います。 クライアントにはInternalServerErrorと共にエラー情報を返します。
      *
-     * @param e 発生した{@link DataAccessException}
+     * @param e 発生した{@link DataAccessException}。
      * @return エラー情報を含むレスポンスエンティティ。
      */
     @ExceptionHandler(DataAccessException.class)
@@ -81,8 +81,8 @@ public class EmployeeGlobalExceptionHandler {
     /**
      * 予期しない例外を捕捉する汎用のエラーハンドラです。クライアントにはInternalServerErrorと共にエラー情報を返します。
      *
-     * @param e 発生した例外
-     * @return エラー情報を含むレスポンスエンティティ
+     * @param e 発生した例外。
+     * @return エラー情報を含むレスポンスエンティティ。
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleUnexpectedExceptions(Exception e) {

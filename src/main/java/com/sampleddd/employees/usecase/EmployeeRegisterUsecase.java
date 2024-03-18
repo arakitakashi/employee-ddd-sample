@@ -18,7 +18,7 @@ public class EmployeeRegisterUsecase {
      *
      * @param firstName 名。
      * @param lastName  姓。
-     * @return 新規登録する従業員ID
+     * @return 新規登録する従業員ID。
      */
     public long execute(String firstName, String lastName) {
         long id = employeeRepository.nextId();
