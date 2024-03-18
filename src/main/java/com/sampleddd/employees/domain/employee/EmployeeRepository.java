@@ -33,6 +33,7 @@ public interface EmployeeRepository {
      * 指定された従業員情報を更新します。
      *
      * @param employee 従業員情報。
+     * @return オプショナルの従業員情報
      */
     Optional<Employee> update(Employee employee);
 

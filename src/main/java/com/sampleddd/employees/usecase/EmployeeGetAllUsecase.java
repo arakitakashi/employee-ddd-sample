@@ -15,6 +15,11 @@ import org.springframework.stereotype.Service;
 public class EmployeeGetAllUsecase {
     private final EmployeeRepository employeeRepository;
 
+    /**
+     * 全ての従業員情報を取得します。
+     *
+     * @return 従業員情報のリスト
+     */
     public List<EmployeeDto> execute() {
         return employeeRepository.findAll().stream().map(this::convertToDto).toList();
     }
