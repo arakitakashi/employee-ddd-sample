@@ -51,7 +51,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         String query = "SELECT id, first_name, last_name FROM employees WHERE id = :id";
 
         Map<String, Object> params = new HashMap<>();
-        params.put("id", Integer.parseInt(id));
+        params.put("id", id);
 
         try {
             EmployeeRecord employeeRecord = jdbcTemplate.queryForObject(query, params,
@@ -134,13 +134,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     private Map<String, Object> createParamsForDelete(String id) {
         Map<String, Object> result = new HashMap<>();
-        result.put("id", Integer.parseInt(id));
+        result.put("id", id);
         return result;
     }
 
     private Map<String, Object> createParams(Employee employee) {
         Map<String, Object> result = new HashMap<>();
-        result.put("id", employee.id());
+        result.put("id", String.valueOf(employee.id()));
         result.put("firstName", employee.firstName());
         result.put("lastName", employee.lastName());
         return result;
