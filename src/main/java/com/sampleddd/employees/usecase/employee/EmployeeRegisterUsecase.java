@@ -1,4 +1,4 @@
-package com.sampleddd.employees.usecase;
+package com.sampleddd.employees.usecase.employee;
 
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class EmployeeRegisterUsecase {
+
     private final EmployeeRepository employeeRepository;
 
     /**

@@ -1,4 +1,8 @@
-package com.sampleddd.employees.usecase;
+package com.sampleddd.employees.usecase.employee;
+
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
 import org.junit.jupiter.api.Test;
@@ -6,12 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @SpringBootTest
 class EmployeeDeleteUsecaseTest {
+
     @InjectMocks
     EmployeeDeleteUsecase sut;
 

@@ -1,14 +1,11 @@
-package com.sampleddd.employees.presentation;
+package com.sampleddd.employees.presentation.employee;
 
-import com.sampleddd.employees.presentation.employee.EmployeeRequest;
-import com.sampleddd.employees.presentation.employee.EmployeeResponse;
-import com.sampleddd.employees.presentation.employee.EmployeeResponses;
-import com.sampleddd.employees.usecase.EmployeeDeleteUsecase;
-import com.sampleddd.employees.usecase.EmployeeGetAllUsecase;
-import com.sampleddd.employees.usecase.EmployeeGetByIdUsecase;
-import com.sampleddd.employees.usecase.EmployeeRegisterUsecase;
-import com.sampleddd.employees.usecase.EmployeeUpdateUsecase;
-import com.sampleddd.employees.usecase.dto.EmployeeDto;
+import com.sampleddd.employees.usecase.employee.EmployeeDeleteUsecase;
+import com.sampleddd.employees.usecase.employee.EmployeeDto;
+import com.sampleddd.employees.usecase.employee.EmployeeGetAllUsecase;
+import com.sampleddd.employees.usecase.employee.EmployeeGetByIdUsecase;
+import com.sampleddd.employees.usecase.employee.EmployeeRegisterUsecase;
+import com.sampleddd.employees.usecase.employee.EmployeeUpdateUsecase;
 import java.net.URI;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +27,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RequiredArgsConstructor
 @RestController
 public class EmployeeController {
+
     private final EmployeeGetAllUsecase employeeGetAllUsecase;
     private final EmployeeGetByIdUsecase employeeGetByIdUsecase;
     private final EmployeeRegisterUsecase employeeRegisterUsecase;

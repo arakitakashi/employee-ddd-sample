@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 @Slf4j
 public class EmployeeGlobalExceptionHandler {
+
     private static final String KEY_OF_CODE = "code";
     private static final String KEY_OF_MESSAGE = "message";
     private static final String KEY_OF_DETAILS = "details";

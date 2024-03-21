@@ -1,12 +1,12 @@
-package com.sampleddd.employees.usecase;
+package com.sampleddd.employees.usecase.employee;
 
 import com.sampleddd.employees.domain.employee.Employee;
-import com.sampleddd.employees.usecase.dto.EmployeeDto;
 
 /**
  * EmployeeオブジェクトをEmployeeDtoに変換するクラス。
  */
 final class EmployeeToDtoConverter {
+
     private EmployeeToDtoConverter() {
     }
 

@@ -1,8 +1,7 @@
-package com.sampleddd.employees.usecase;
+package com.sampleddd.employees.usecase.employee;
 
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
 import com.sampleddd.employees.domain.exception.EmployeeNotFoundException;
-import com.sampleddd.employees.usecase.dto.EmployeeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class EmployeeGetByIdUsecase {
+
     private final EmployeeRepository employeeRepository;
 
     /**
@@ -22,6 +22,6 @@ public class EmployeeGetByIdUsecase {
      */
     public EmployeeDto execute(String id) {
         return employeeRepository.findById(id).map(EmployeeToDtoConverter::execute)
-                .orElseThrow(() -> new EmployeeNotFoundException(id));
+            .orElseThrow(() -> new EmployeeNotFoundException(id));
     }
 }

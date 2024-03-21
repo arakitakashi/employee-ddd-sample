@@ -1,4 +1,4 @@
-package com.sampleddd.employees.infrastructure;
+package com.sampleddd.employees.infrastructure.employee;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,11 +8,9 @@ import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.junit5.api.DBRider;
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
-
 import java.sql.DriverManager;
 import java.util.List;
 import java.util.Optional;
-
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
@@ -25,6 +23,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @DBRider
 @DBUnit(cacheConnection = false)
 public class EmployeeRepositoryImplTest {
+
     private static final String DB_URL =
         "jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false";
     private static final String DB_USER = "utuser";
@@ -45,6 +44,7 @@ public class EmployeeRepositoryImplTest {
 
     @Nested
     class 全件取得 {
+
         @Test
         @DataSet(value = "datasets/employee/employees-setup.yml")
         void 全ての従業員情報を取得する() {
@@ -63,6 +63,7 @@ public class EmployeeRepositoryImplTest {
 
     @Nested
     class 単体取得 {
+
         @Test
         @DataSet(value = "datasets/employee/employees-setup.yml")
         void 指定されたIdの住所情報を取得する() {
@@ -81,6 +82,7 @@ public class EmployeeRepositoryImplTest {
 
     @Nested
     class 新規登録 {
+
         @Test
         @DataSet(value = "datasets/employee/employees-setup.yml")
         void 指定した従業員情報を新規登録する() {
@@ -103,6 +105,7 @@ public class EmployeeRepositoryImplTest {
 
     @Nested
     class 更新 {
+
         @Test
         @DataSet(value = "datasets/employee/employees-setup.yml")
         void 指定した従業員情報を更新する() {
@@ -132,6 +135,7 @@ public class EmployeeRepositoryImplTest {
 
     @Nested
     class 削除 {
+
         @Test
         @DataSet(value = "datasets/employee/employees-setup.yml")
         void 指定したIDの従業員情報の削除に成功するとtrueを返す() {
@@ -161,6 +165,7 @@ public class EmployeeRepositoryImplTest {
 
     @Nested
     class ID採番 {
+
         @Test
         @DataSet(value = "datasets/employee/employees-setup.yml")
         void 新規でIDのためのナンバーを採番する() {

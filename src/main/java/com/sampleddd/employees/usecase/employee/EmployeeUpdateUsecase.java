@@ -1,11 +1,10 @@
-package com.sampleddd.employees.usecase;
+package com.sampleddd.employees.usecase.employee;
 
 import static io.micrometer.common.util.StringUtils.isBlank;
 
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
 import com.sampleddd.employees.domain.exception.EmployeeNotFoundException;
-import com.sampleddd.employees.usecase.dto.EmployeeDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class EmployeeUpdateUsecase {
+
     private final EmployeeRepository employeeRepository;
 
     /**

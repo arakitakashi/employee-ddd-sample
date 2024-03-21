@@ -14,4 +14,5 @@ public record EmployeeResponse(
     @JsonProperty("firstName") String firstName,
     @JsonProperty("lastName") String lastName
 ) {
+
 }

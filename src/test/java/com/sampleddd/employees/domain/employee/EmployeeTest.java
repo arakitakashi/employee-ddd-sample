@@ -1,12 +1,13 @@
 package com.sampleddd.employees.domain.employee;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 class EmployeeTest {
+
     long MAX_LENGTH_EXCEEDED_ID = 12345678901L;
     long VALID_ID = 1;
     String MAX_LENGTH_EXCEEDED_FIRST_NAME = "A".repeat(101);
@@ -27,7 +28,7 @@ class EmployeeTest {
            1 |       TARO |      '  ' | lastName must not be blank  | 名字がスペースのみ
         """)
     void ガード条件に違反する不正な値を検出する(long id, String firstName, String lastName, String message,
-                                      String testName)
+        String testName)
         throws Exception {
         // assert
         assertThatThrownBy(() -> new Employee(id, firstName, lastName))

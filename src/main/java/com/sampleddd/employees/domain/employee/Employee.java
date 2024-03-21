@@ -16,6 +16,7 @@ import static io.micrometer.common.util.StringUtils.isBlank;
  * @param lastName  従業員の姓。
  */
 public record Employee(long id, String firstName, String lastName) {
+
     private static final int ID_MAX_LENGTH = 10;
     private static final int FIRST_NAME_MAX_LENGTH = 100;
     private static final int LAST_NAME_MAX_LENGTH = 100;
@@ -24,7 +25,9 @@ public record Employee(long id, String firstName, String lastName) {
      * 従業員エンティティのコンストラクタ。
      */
     public Employee {
-        if (id <= 0) throw new IllegalArgumentException(ID_NOT_POSITIVE_VALUE_MESSAGE.message());
+        if (id <= 0) {
+            throw new IllegalArgumentException(ID_NOT_POSITIVE_VALUE_MESSAGE.message());
+        }
         if (String.valueOf(id).length() > ID_MAX_LENGTH) {
             throw new IllegalArgumentException(ID_MAX_LENGTH_EXCEEDED_MESSAGE.message());
         }

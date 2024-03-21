@@ -1,14 +1,14 @@
-package com.sampleddd.employees.presentation;
+package com.sampleddd.employees.presentation.employee;
 
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -16,7 +16,6 @@ import ch.qos.logback.core.Appender;
 import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
 import com.sampleddd.employees.domain.exception.EmployeeGlobalExceptionHandler;
-import com.sampleddd.employees.presentation.employee.EmployeeRequest;
 import io.restassured.RestAssured;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +32,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.event.LoggingEvent;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -43,6 +41,7 @@ import org.springframework.http.HttpStatus;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class EmployeeControllerTest {
+
     @Mock
     Appender<ILoggingEvent> appender;
 
@@ -62,6 +61,7 @@ public class EmployeeControllerTest {
 
     @Nested
     class ルート {
+
         @Test
         void ルートURLにアクセスができる() {
             // assert
@@ -75,6 +75,7 @@ public class EmployeeControllerTest {
 
     @Nested
     class 参照 {
+
         @Test
         void 全ての従業員情報を取得する() throws Exception {
             // arrange
@@ -123,6 +124,7 @@ public class EmployeeControllerTest {
 
     @Nested
     class 新規登録 {
+
         @Test
         void 指定した従業員情報を登録する() throws Exception {
             // arrange
@@ -168,6 +170,7 @@ public class EmployeeControllerTest {
 
     @Nested
     class 更新 {
+
         @Test
         void 指定したIDの従業員情報を更新する() throws Exception {
             EmployeeRequest employeeRequest = new EmployeeRequest(
@@ -190,6 +193,7 @@ public class EmployeeControllerTest {
 
     @Nested
     class 削除 {
+
         @Test
         void 指定したIDの従業員情報を削除する() {
             // arrange
@@ -202,6 +206,7 @@ public class EmployeeControllerTest {
 
     @Nested
     class 共通エラー {
+
         @Test
         void データベース接続に問題が生じた場合InternalServerErrorのレスポンスを返す() throws Exception {
             // arrange

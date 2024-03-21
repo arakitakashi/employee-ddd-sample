@@ -1,4 +1,4 @@
-package com.sampleddd.employees.usecase;
+package com.sampleddd.employees.usecase.employee;
 
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
 import com.sampleddd.employees.domain.exception.EmployeeNotFoundException;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class EmployeeDeleteUsecase {
+
     private final EmployeeRepository employeeRepository;
 
     /**

@@ -1,4 +1,4 @@
-package com.sampleddd.employees.infrastructure;
+package com.sampleddd.employees.infrastructure.employee;
 
 import static com.sampleddd.employees.domain.exception.ExceptionMessages.DATABASE_ACCESS_ERROR_MESSAGE;
 import static com.sampleddd.employees.domain.exception.ExceptionMessages.EMPLOYEE_NOT_FOUND_MESSAGE;
@@ -25,6 +25,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class EmployeeRepositoryImpl implements EmployeeRepository {
+
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     /**
@@ -153,7 +154,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         try {
             return Optional.ofNullable(
                 jdbcTemplate.queryForObject(query, new HashMap<>(), Long.class)).orElseThrow(
-                () -> new IllegalStateException(FAIL_GET_NEXT_ID_NUMBER_MESSAGE.message()));
+                    () -> new IllegalStateException(FAIL_GET_NEXT_ID_NUMBER_MESSAGE.message()));
         } catch (DataAccessException e) {
             log.warn(DATABASE_ACCESS_ERROR_MESSAGE.message(), e);
             throw e;

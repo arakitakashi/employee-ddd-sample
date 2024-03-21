@@ -8,4 +8,5 @@ import java.util.List;
  * @param employees EmployeeResponse のリスト。
  */
 public record EmployeeResponses(List<EmployeeResponse> employees) {
+
 }

@@ -9,7 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @param lastName  姓。
  */
 public record EmployeeRequest(
-        @JsonProperty("firstName") String firstName,
-        @JsonProperty("lastName") String lastName
+    @JsonProperty("firstName") String firstName,
+    @JsonProperty("lastName") String lastName
 ) {
+
 }
