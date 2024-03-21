@@ -40,7 +40,7 @@ public class EmployeeController {
      * @return レスポンスエンティティ。
      */
     @GetMapping("/")
-    public ResponseEntity<Void> getRoor() {
+    public ResponseEntity<Void> getRoot() {
         return ResponseEntity.ok().build();
     }
 
@@ -78,7 +78,7 @@ public class EmployeeController {
     /**
      * 新しい従業員情報を登録します。登録に成功すると201 Created とともに従業員情報のURIを返します。
      *
-     * @param employeeRequest 新規従業員情報。
+     * @param employeeRequest 新規の従業員情報。
      * @return 登録された従業員情報のURIを含むレスポンスエンティティ。
      */
     @PostMapping("/v1/employees")

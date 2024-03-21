@@ -147,6 +147,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public long nextId() {
         String query = "SELECT NEXTVAL('EMPLOYEE_ID_SEQ')";

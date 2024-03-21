@@ -18,7 +18,7 @@ public class EmployeeGetByIdUsecase {
      * 指定されたIDの従業員情報を取得します。従業員情報が存在しない場合例外を発生させます。
      *
      * @param id ID。
-     * @return 指定されたIDの従業員情報を含むDTO。
+     * @return 指定されたIDの従業員情報のDTO。
      */
     public EmployeeDto execute(String id) {
         return employeeRepository.findById(id).map(EmployeeToDtoConverter::execute)

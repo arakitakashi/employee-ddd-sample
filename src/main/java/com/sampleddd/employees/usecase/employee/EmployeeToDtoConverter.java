@@ -14,7 +14,7 @@ final class EmployeeToDtoConverter {
      * EmployeeオブジェクトをEmployeeDtoに変換して返します。
      *
      * @param employee 従業員オブジェクト。
-     * @return 従業員DTO。
+     * @return 従業員情報のDTO。
      */
     public static EmployeeDto execute(Employee employee) {
         return new EmployeeDto(employee.id(), employee.firstName(), employee.lastName());
