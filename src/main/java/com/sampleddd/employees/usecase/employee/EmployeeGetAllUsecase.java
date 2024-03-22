@@ -1,6 +1,5 @@
 package com.sampleddd.employees.usecase.employee;
 
-import com.sampleddd.employees.domain.employee.Employee;
 import com.sampleddd.employees.domain.employee.EmployeeRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -21,14 +20,6 @@ public class EmployeeGetAllUsecase {
      * @return 従業員情報 DTO のリスト。
      */
     public List<EmployeeDto> execute() {
-        return employeeRepository.findAll().stream().map(this::convertToDto).toList();
-    }
-
-    private EmployeeDto convertToDto(Employee employee) {
-        return new EmployeeDto(
-            employee.id(),
-            employee.firstName(),
-            employee.lastName()
-        );
+        return employeeRepository.findAll().stream().map(EmployeeToDtoConverter::execute).toList();
     }
 }
