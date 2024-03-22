@@ -22,7 +22,7 @@ public class EmployeeUpdateUsecase {
     /**
      * 既存の従業員情報を更新します。
      *
-     * @param employeeDto 更新する従業員情報のDTO。
+     * @param employeeDto 更新する従業員情報の DTO。
      */
     public void execute(EmployeeDto employeeDto) {
         Employee existingEmployee = employeeRepository.findById(String.valueOf(employeeDto.id()))

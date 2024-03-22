@@ -21,7 +21,7 @@ class EmployeeGetAllUsecaseTest {
     EmployeeRepository employeeRepository;
 
     @Test
-    void 全ての住所情報を返す() {
+    void 全ての従業員情報を返す() {
         // arrange
         when(employeeRepository.findAll()).thenReturn(List.of(
                 new Employee(1, "Taro", "Yamada"),

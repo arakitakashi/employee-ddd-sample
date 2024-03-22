@@ -63,7 +63,7 @@ public class EmployeeController {
     }
 
     /**
-     * 指定されたIDの従業員情報を取得します。存在しない場合は404 Not Foundを返します。
+     * 指定された ID の従業員情報を取得します。存在しない場合は 404 Not Found を返します。
      *
      * @param id ID。
      * @return 従業員情報。
@@ -76,10 +76,10 @@ public class EmployeeController {
     }
 
     /**
-     * 新しい従業員情報を登録します。登録に成功すると201 Created とともに従業員情報のURIを返します。
+     * 新しい従業員情報を登録します。登録に成功すると 201 Created とともに従業員情報の URI を返します。
      *
      * @param employeeRequest 新規の従業員情報。
-     * @return 登録された従業員情報のURIを含むレスポンスエンティティ。
+     * @return 登録された従業員情報の URI を含むレスポンスエンティティ。
      */
     @PostMapping("/v1/employees")
     @ResponseStatus(HttpStatus.CREATED)
@@ -96,7 +96,7 @@ public class EmployeeController {
     }
 
     /**
-     * 指定されたIDの従業員情報を更新します。 更新に成功すると204 No Contentを返します。
+     * 指定された ID の従業員情報を更新します。 更新に成功すると 204 No Content を返します。
      *
      * @param id              ID。
      * @param employeeRequest 更新する従業員情報。
@@ -115,7 +115,7 @@ public class EmployeeController {
     }
 
     /**
-     * 指定されたIDの従業員情報を削除します。 削除に成功すると 204 No Contentを返します。
+     * 指定された ID の従業員情報を削除します。 削除に成功すると 204 No Content を返します。
      *
      * @param id ID。
      * @return レスポンスエンティティ。

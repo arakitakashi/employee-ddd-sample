@@ -3,7 +3,7 @@ package com.sampleddd.employees.usecase.employee;
 import com.sampleddd.employees.domain.employee.Employee;
 
 /**
- * EmployeeオブジェクトをEmployeeDtoに変換するクラス。
+ * Employee オブジェクトを EmployeeDto に変換するクラス。
  */
 final class EmployeeToDtoConverter {
 
@@ -11,10 +11,10 @@ final class EmployeeToDtoConverter {
     }
 
     /**
-     * EmployeeオブジェクトをEmployeeDtoに変換して返します。
+     * Employee オブジェクトを EmployeeDto に変換して返します。
      *
      * @param employee 従業員オブジェクト。
-     * @return 従業員情報のDTO。
+     * @return 従業員情報の DTO。
      */
     public static EmployeeDto execute(Employee employee) {
         return new EmployeeDto(employee.id(), employee.firstName(), employee.lastName());

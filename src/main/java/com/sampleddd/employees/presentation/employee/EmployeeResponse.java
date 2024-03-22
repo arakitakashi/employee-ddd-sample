@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 出力のための従業員情報のレスポンスボディをマッピングするクラス。
  *
- * @param id        従業員ID。
+ * @param id        ID。
  * @param firstName 名。
  * @param lastName  姓。
  */

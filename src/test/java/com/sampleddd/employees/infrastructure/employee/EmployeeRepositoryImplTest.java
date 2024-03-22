@@ -66,7 +66,7 @@ public class EmployeeRepositoryImplTest {
 
         @Test
         @DataSet(value = "datasets/employee/employees-setup.yml")
-        void 指定されたIdの住所情報を取得する() {
+        void 指定されたIdの従業員情報を取得する() {
             // arrange
             Optional<Employee> expected = Optional.of(
                 new Employee(1L, "Taro", "Yamada")

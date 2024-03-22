@@ -1,7 +1,7 @@
 package com.sampleddd.employees.usecase.employee;
 
 /**
- * 従業員情報のDTOクラス。
+ * 従業員情報の DTO クラス。
  *
  * @param id        ID。
  * @param firstName 名。

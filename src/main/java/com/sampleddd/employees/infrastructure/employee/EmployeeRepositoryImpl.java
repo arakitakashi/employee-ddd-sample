@@ -19,7 +19,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
- * {@link EmployeeRepository}のJDBCによる実装。 従業員情報のデータベース操作を担います。
+ * {@link EmployeeRepository}の JDBC による実装。 従業員情報のデータベース操作を担います。
  */
 @Slf4j
 @Repository

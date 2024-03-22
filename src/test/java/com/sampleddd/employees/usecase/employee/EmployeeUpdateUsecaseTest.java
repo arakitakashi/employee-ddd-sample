@@ -40,7 +40,7 @@ class EmployeeUpdateUsecaseTest {
     }
 
     @Test
-    void 指定したIDの住所情報が存在しない場合例外が発生する() {
+    void 指定したIDの従業員情報が存在しない場合例外が発生する() {
         // arrange
         EmployeeDto employeeDto = createEmployeeDto(99L);
 

@@ -26,7 +26,7 @@ public class EmployeeGlobalExceptionHandler {
     private static final String KEY_OF_DETAILS = "details";
 
     /**
-     * {@link EmployeeNotFoundException} が発生した場合の処理を行います。 クライアントにはBadRequestと共にエラー情報を返します。
+     * {@link EmployeeNotFoundException} が発生した場合の処理を行います。 クライアントには BadRequest と共にエラー情報を返します。
      *
      * @param e 発生した{@link EmployeeNotFoundException}。
      * @return エラー情報を含むレスポンスエンティティ。
@@ -63,7 +63,7 @@ public class EmployeeGlobalExceptionHandler {
     }
 
     /**
-     * {@link DataAccessException}が発生した場合の処理を行います。 クライアントにはInternalServerErrorと共にエラー情報を返します。
+     * {@link DataAccessException}が発生した場合の処理を行います。 クライアントには InternalServerError と共にエラー情報を返します。
      *
      * @param e 発生した{@link DataAccessException}。
      * @return エラー情報を含むレスポンスエンティティ。
@@ -80,7 +80,7 @@ public class EmployeeGlobalExceptionHandler {
     }
 
     /**
-     * 予期しない例外を捕捉する汎用のエラーハンドラです。クライアントにはInternalServerErrorと共にエラー情報を返します。
+     * 予期しない例外を捕捉する汎用のエラーハンドラです。クライアントには InternalServerError と共にエラー情報を返します。
      *
      * @param e 発生した例外。
      * @return エラー情報を含むレスポンスエンティティ。

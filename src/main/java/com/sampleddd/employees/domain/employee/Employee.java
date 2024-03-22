@@ -11,9 +11,9 @@ import static io.micrometer.common.util.StringUtils.isBlank;
 /**
  * 従業員エンティティを表すクラス。従業員の基本情報である名前、姓、ID を保持します。
  *
- * @param id        従業員ID。
- * @param firstName 従業員の名前。
- * @param lastName  従業員の姓。
+ * @param id        ID。
+ * @param firstName 名。
+ * @param lastName  姓。
  */
 public record Employee(long id, String firstName, String lastName) {
 

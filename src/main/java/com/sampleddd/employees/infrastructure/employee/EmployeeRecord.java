@@ -3,7 +3,7 @@ package com.sampleddd.employees.infrastructure.employee;
 /**
  * 従業員情報を表すクラス。リポジトリにおいてデータベースから取得した住所情報をマッピングします。
  *
- * @param id        従業員ID。
+ * @param id        ID。
  * @param firstName 名。
  * @param lastName  姓。
  */

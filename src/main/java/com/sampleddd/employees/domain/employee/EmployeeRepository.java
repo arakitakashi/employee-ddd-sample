@@ -16,7 +16,7 @@ public interface EmployeeRepository {
     List<Employee> findAll();
 
     /**
-     * 指定されたIDの従業員情報を取得します。
+     * 指定された ID の従業員情報を取得します。
      *
      * @param id ID。
      * @return 従業員情報。
@@ -39,7 +39,7 @@ public interface EmployeeRepository {
     Optional<Employee> update(Employee employee);
 
     /**
-     * 指定されたIDの従業員情報を削除します。
+     * 指定された ID の従業員情報を削除します。
      *
      * @param id ID。
      * @return 削除の成否を表すブーリアン。
@@ -47,7 +47,7 @@ public interface EmployeeRepository {
     boolean delete(String id);
 
     /**
-     * データベースから付番される次のIDの値を返します。
+     * データベースから付番される次の ID の値を返します。
      *
      * @return 付番された新しいIDの値。
      */
